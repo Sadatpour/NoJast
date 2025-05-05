@@ -589,7 +589,7 @@ video {
   display: none;
 }
   :root {
-    --background: 0 0% 100%;
+    --background: 231 21% 91%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -621,7 +621,7 @@ video {
   }
  
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 220 23% 17%;
     --foreground: 210 40% 98%;
  
     --card: 222.2 84% 4.9%;
@@ -833,6 +833,9 @@ video {
 }
 .mt-auto {
   margin-top: auto;
+}
+.mr-8 {
+  margin-right: 2rem;
 }
 .line-clamp-2 {
   overflow: hidden;
@@ -1357,6 +1360,9 @@ video {
 .rounded-sm {
   border-radius: calc(var(--radius) - 4px);
 }
+.rounded-xl {
+  border-radius: 0.75rem;
+}
 .border {
   border-width: 1px;
 }
@@ -1623,6 +1629,10 @@ video {
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
 .pb-2 {
   padding-bottom: 0.5rem;
 }
@@ -1886,6 +1896,11 @@ video {
 .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-\[6px_6px_16px_\#1a202c1a\2c _-6px_-6px_16px_\#fff8\] {
+  --tw-shadow: 6px 6px 16px #1a202c1a, -6px -6px 16px #fff8;
+  --tw-shadow-colored: 6px 6px 16px var(--tw-shadow-color), -6px -6px 16px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .outline-none {
@@ -2243,6 +2258,10 @@ video {
 
 .focus\:ring-ring:focus {
   --tw-ring-color: hsl(var(--ring));
+}
+
+.focus\:ring-primary\/50:focus {
+  --tw-ring-color: hsl(var(--primary) / 0.5);
 }
 
 .focus\:ring-offset-2:focus {
@@ -2650,6 +2669,12 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.dark\:shadow-\[6px_6px_16px_\#0006\2c _-6px_-6px_16px_\#fff1\]:is(.dark *) {
+  --tw-shadow: 6px 6px 16px #0006, -6px -6px 16px #fff1;
+  --tw-shadow-colored: 6px 6px 16px var(--tw-shadow-color), -6px -6px 16px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .dark\:hover\:bg-blue-900\/30:hover:is(.dark *) {
   background-color: rgb(30 58 138 / 0.3);
 }
@@ -2756,6 +2781,10 @@ video {
 
   .md\:block {
     display: block;
+  }
+
+  .md\:flex {
+    display: flex;
   }
 
   .md\:grid {

@@ -47,7 +47,7 @@ export function Header({ user }: HeaderProps) {
           <nav className="flex items-center space-x-2 rtl:space-x-reverse">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm">
+                <Button variant="neumorphic" size="sm">
                   {locale === 'fa' ? 'فارسی' : 'English'}
                 </Button>
               </DropdownMenuTrigger>
@@ -63,7 +63,7 @@ export function Header({ user }: HeaderProps) {
             <ModeToggle />
             {user ? (
               <>
-                <Button variant="ghost" size="sm" asChild>
+                <Button variant="neumorphic" size="sm" asChild>
                   <Link href="/submit-product">
                     {t('submit')}
                   </Link>

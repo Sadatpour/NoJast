@@ -186,7 +186,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
               محصول یا خدمت خود را ثبت کنید تا هزاران کاربر آن را ببینند و امتیاز دهند.
             </p>
-            <Button asChild className="w-full">
+            <Button asChild variant="neumorphic" className="w-full">
               <Link href="/submit-product">
                 ثبت محصول جدید
               </Link>

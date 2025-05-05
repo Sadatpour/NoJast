@@ -365,7 +365,7 @@ export default function SubmitProductPage() {
                         <div className="flex items-center gap-4">
                           <Button
                             type="button"
-                            variant="outline"
+                            variant="neumorphic"
                             disabled={isUploading}
                             onClick={() => document.getElementById('thumbnail')?.click()}
                           >
@@ -411,6 +411,7 @@ export default function SubmitProductPage() {
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full md:w-auto"
+                    variant="neumorphic"
                   >
                     {isSubmitting ? "در حال ثبت..." : "ثبت محصول"}
                   </Button>
