@@ -27,8 +27,8 @@ export function Header({ user }: HeaderProps) {
   const { t, locale, changeLocale } = useLanguage()
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
+    <header className="sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-gray-300 dark:border-zinc-500">
+      <div className="container flex h-20 items-center justify-between">
         <Link href="/" className="mr-4 flex items-center space-x-2 rtl:space-x-reverse">
           {locale === 'fa' ? (
             <Image src="/logos/logo-fa.png" alt="نوجست" width={180} height={60} className="h-12 w-auto" priority />
@@ -44,23 +44,7 @@ export function Header({ user }: HeaderProps) {
             <SearchBar />
           </div>
           
-          <nav className="flex items-center space-x-2 rtl:space-x-reverse">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="neumorphic" size="sm">
-                  {locale === 'fa' ? 'فارسی' : 'English'}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => changeLocale('fa' as Locale)}>
-                  فارسی
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => changeLocale('en' as Locale)}>
-                  English
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <ModeToggle />
+          <nav className="flex items-center space-x-2 rtl:space-x-reverse h-full">
             {user ? (
               <>
                 <Button variant="neumorphic" size="sm" asChild>
@@ -68,6 +52,22 @@ export function Header({ user }: HeaderProps) {
                     {t('submit')}
                   </Link>
                 </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="neumorphic" size="sm">
+                      {locale === 'fa' ? 'فارسی' : 'English'}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={() => changeLocale('fa' as Locale)}>
+                      فارسی
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => changeLocale('en' as Locale)}>
+                      English
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                <ModeToggle />
                 <NotificationDropdown />
                 <UserNav user={user} />
               </>

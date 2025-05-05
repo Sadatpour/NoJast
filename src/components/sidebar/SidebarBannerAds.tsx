@@ -4,6 +4,8 @@ import { useEffect, useState, useRef, useCallback } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { useLanguage } from "@/components/LanguageProvider"
+import { Megaphone } from "lucide-react"
 
 type SidebarType = "main-left" | "main-right" | "product"
 
@@ -26,6 +28,7 @@ const PAGE_SIZE = 5
 
 export const SidebarBannerAds = ({ sidebar, className }: SidebarBannerAdsProps) => {
   const supabase = createClient()
+  const { locale } = useLanguage()
   const [ads, setAds] = useState<BannerAd[]>([])
   const [page, setPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
@@ -65,6 +68,12 @@ export const SidebarBannerAds = ({ sidebar, className }: SidebarBannerAdsProps) 
     fetchAds(page)
   }, [fetchAds, page])
 
+  // Helper to shuffle and pick 3 random ads
+  function getRandomAds(adList: BannerAd[], count: number) {
+    const shuffled = [...adList].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  }
+
   // Infinite scroll observer
   useEffect(() => {
     if (!hasMore || loading) return
@@ -84,7 +93,11 @@ export const SidebarBannerAds = ({ sidebar, className }: SidebarBannerAdsProps) 
 
   return (
     <aside className={cn("flex flex-col gap-4", className)}>
-      {ads.map(ad => (
+      <div className="font-semibold text-center text-xs text-gray-600 dark:text-gray-300 mb-2 flex items-center justify-center gap-2">
+        <Megaphone className="w-6 h-6 inline-block mb-0.5" style={{ color: '#F99E32' }} />
+        {locale === 'fa' ? 'اینا پول دادن که دیده بشن!' : 'Paid to catch your eye!'}
+      </div>
+      {getRandomAds(ads, 3).map(ad => (
         <a
           key={ad.id}
           href={ad.link}
@@ -104,9 +117,6 @@ export const SidebarBannerAds = ({ sidebar, className }: SidebarBannerAdsProps) 
       ))}
       {loading && <div className="text-center py-2 text-xs text-gray-500">در حال بارگذاری...</div>}
       <div ref={loaderRef} />
-      {!hasMore && ads.length > 0 && (
-        <div className="text-center text-xs text-gray-400 py-2">پایان تبلیغات</div>
-      )}
     </aside>
   )
 } 
