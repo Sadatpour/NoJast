@@ -33,7 +33,7 @@ export default function AdminDashboardPage() {
         }
         
         const { data } = await supabase
-          .from('users')
+          .from('profiles')
           .select('is_admin')
           .eq('id', user.id)
           .single();
@@ -49,7 +49,7 @@ export default function AdminDashboardPage() {
             { count: adsCount }
           ] = await Promise.all([
             supabase.from('products').select('*', { count: 'exact', head: true }),
-            supabase.from('users').select('*', { count: 'exact', head: true }),
+            supabase.from('profiles').select('*', { count: 'exact', head: true }),
             supabase.from('products').select('*', { count: 'exact', head: true }).eq('is_approved', false),
             supabase.from('banner_ads').select('*', { count: 'exact', head: true }).eq('is_active', true)
           ]);

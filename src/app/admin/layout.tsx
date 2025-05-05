@@ -36,7 +36,7 @@ export default function AdminLayout({
         
         // بررسی وضعیت ادمین بودن
         const { data } = await supabase
-          .from('users')
+          .from('profiles')
           .select('is_admin')
           .eq('id', user.id)
           .single()
