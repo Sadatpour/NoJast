@@ -1,0 +1,10 @@
+CHANGES SUMMARY:
+
+1. Changed '?????' to '?????' in the Persian footer text
+   - File: src/lib/i18n.ts
+   - Line: footerLove: '??  ?? ????? ???? ????? ????? ???',
+
+2. Added logos for different languages:
+   - Created directory: /public/logos/
+   - Persian logo should be placed at: /public/logos/logo-fa.png
+   - English logo should be placed at: /public/logos/logo-en.png
