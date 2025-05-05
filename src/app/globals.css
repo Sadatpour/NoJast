@@ -106,4 +106,16 @@
 
 .font-medium {
   font-weight: 400 !important;
+}
+
+.font-semibold {
+  font-weight: 500;
+}
+
+.text-xs {
+  font-size: 0.90rem;
+}
+
+.h-32 {
+    height: 10rem;
 } 
