@@ -3,23 +3,9 @@
 // Remove server-only imports
 // import { cookies } from 'next/headers'
 
-export type Locale = 'fa' | 'en'
+export type Locale = 'fa'
 
 export function getLocale(): Locale {
-  // Client-side implementation
-  if (typeof document !== 'undefined') {
-    // Browser environment
-    const localeCookie = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('locale='))
-      ?.split('=')[1];
-    
-    if (localeCookie) {
-      return localeCookie as Locale;
-    }
-  }
-  
-  // Default to Persian
   return 'fa'
 }
 
@@ -63,9 +49,7 @@ export const translations = {
     // Forms
     submitProduct: 'ثبت محصول جدید',
     productTitle: 'عنوان محصول',
-    productTitleEn: 'عنوان محصول (انگلیسی)',
     productDescription: 'توضیحات محصول',
-    productDescriptionEn: 'توضیحات محصول (انگلیسی)',
     productUrl: 'آدرس محصول',
     productCategory: 'دسته‌بندی',
     productTags: 'برچسب‌ها',
@@ -76,59 +60,6 @@ export const translations = {
     // Footer
     footerTagline: 'نو (new) + جَست (search)',
     footerLove: 'با ❤️ در ایران توسط مجتبی سادات پور',
-  },
-  en: {
-    // Navigation
-    home: 'Home',
-    dashboard: 'Dashboard',
-    login: 'Login',
-    signup: 'Sign Up',
-    submit: 'Submit Product',
-    search: 'Search...',
-    // Categories
-    all: 'All',
-    ai: 'AI',
-    tools: 'Tools',
-    games: 'Games',
-    design: 'Design',
-    development: 'Development',
-    // Sorting
-    newest: 'Newest',
-    popular: 'Popular',
-    // Product
-    upvote: 'Upvote',
-    upvoted: 'Upvoted',
-    comments: 'Comments',
-    visit: 'Visit',
-    // Auth
-    emailLabel: 'Email',
-    passwordLabel: 'Password',
-    fullNameLabel: 'Full Name',
-    usernameLabel: 'Username',
-    continueWithGoogle: 'Continue with Google',
-    forgotPassword: 'Forgot Password',
-    dontHaveAccount: 'Don\'t have an account?',
-    alreadyHaveAccount: 'Already have an account?',
-    // User
-    profile: 'Profile',
-    settings: 'Settings',
-    logout: 'Logout',
-    // Forms
-    submitProduct: 'Submit New Product',
-    productTitle: 'Product Title',
-    productTitleEn: 'Product Title (English)',
-    productDescription: 'Product Description',
-    productDescriptionEn: 'Product Description (English)',
-    productUrl: 'Product URL',
-    productCategory: 'Category',
-    productTags: 'Tags',
-    productThumbnail: 'Thumbnail',
-    // Comments
-    addComment: 'Add Comment',
-    yourComment: 'Your comment...',
-    // Footer
-    footerTagline: 'New + Search',
-    footerLove: 'Made with ❤️ in Iran by Mojtaba Sadatpour',
   }
 }
 

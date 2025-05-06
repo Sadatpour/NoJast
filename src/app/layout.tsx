@@ -8,6 +8,7 @@ import { LanguageProvider } from "@/components/LanguageProvider";
 import { Footer } from "@/components/layout/Footer";
 import { cookies } from "next/headers";
 import { Preloader } from "@/components/Preloader";
+import '../styles/wave.css';
 
 // Font setup
 const vazirmatn = Vazirmatn({ 
@@ -34,22 +35,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Get locale from cookies on the server side
-  const cookieStore = await cookies();
-  const localeCookie = cookieStore.get('locale');
-  const locale = localeCookie ? localeCookie.value : 'fa';
-  
-  const dir = locale === "fa" ? "rtl" : "ltr";
-  
-  // Apply the appropriate font class based on language
-  const fontClass = locale === "fa" 
-    ? "font-kalameh" 
-    : `${exo2.variable} font-sans`;
-
   return (
-    <html lang={locale} dir={dir} suppressHydrationWarning>
-      <body className={`${fontClass} min-h-screen bg-background text-black dark:text-white antialiased`}>
-        <LanguageProvider defaultLocale={locale}>
+    <html lang="fa" dir="rtl" suppressHydrationWarning>
+      <body className="font-kalameh min-h-screen bg-background text-black dark:text-white antialiased">
+        <LanguageProvider>
           <Preloader />
           <ThemeProvider
             attribute="class"

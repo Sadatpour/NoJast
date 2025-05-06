@@ -9,6 +9,8 @@ import { ProductCard, type Product } from "@/components/products/ProductCard"
 import { UserFollowButton } from "@/components/profile/UserFollowButton"
 import { ExternalLink, MapPin, Calendar } from "lucide-react"
 import { formatDate } from "@/lib/utils"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { ProfileForm } from '@/components/profile/ProfileForm'
 
 interface PageProps {
   params: {
@@ -174,10 +176,11 @@ export default async function UserProfilePage({ params }: PageProps) {
   const formattedJoinDate = formatDate(joinDate)
 
   return (
-    <div className="container py-10">
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
-        <div className="lg:col-span-1">
-          <div className="sticky top-20 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm p-6">
+    <div className="container py-6">
+      <div className="grid grid-cols-1 gap-4">
+        {/* سایدبار پروفایل */}
+        <div className="w-full">
+          <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800 shadow-sm p-3 lg:p-6 w-full">
             <div className="flex flex-col items-center text-center">
               <div className="w-24 h-24 relative mb-4">
                 {profile.avatar_url ? (
@@ -193,14 +196,33 @@ export default async function UserProfilePage({ params }: PageProps) {
                   </div>
                 )}
               </div>
-              
               <h1 className="text-xl font-bold mb-1">{profile.full_name}</h1>
               <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">@{profile.username}</p>
-              
               {profile.bio && (
                 <p className="text-sm mb-4 whitespace-pre-line">{profile.bio}</p>
               )}
-              
+              {currentUser && currentUser.id === profile.id && (profile.role === 'admin' || profile.is_admin) && (
+                <div className="flex justify-center w-full mb-4">
+                  <Button asChild variant="secondary" className="w-auto mx-auto">
+                    <a href="/dashboard">داشبورد</a>
+                  </Button>
+                </div>
+              )}
+              {currentUser && currentUser.id === profile.id && (
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="flex justify-center w-full mb-4">
+                      <Button variant="outline" className="w-auto mx-auto">ویرایش پروفایل</Button>
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent className="max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>ویرایش پروفایل</DialogTitle>
+                    </DialogHeader>
+                    <ProfileForm user={currentUser} />
+                  </DialogContent>
+                </Dialog>
+              )}
               <div className="flex gap-4 mb-4 text-sm">
                 <div>
                   <span className="font-semibold">{userProducts.length}</span>
@@ -215,7 +237,6 @@ export default async function UserProfilePage({ params }: PageProps) {
                   <span className="text-gray-500 dark:text-gray-400 ml-1">دنبال شده</span>
                 </div>
               </div>
-              
               {currentUser && currentUser.id !== profile.id && (
                 <UserFollowButton
                   userId={currentUser.id}
@@ -223,7 +244,6 @@ export default async function UserProfilePage({ params }: PageProps) {
                   initialIsFollowing={isFollowing}
                 />
               )}
-              
               <div className="mt-6 w-full border-t border-gray-200 dark:border-gray-800 pt-4">
                 <ul className="space-y-2 text-sm">
                   {profile.location && (
@@ -254,48 +274,48 @@ export default async function UserProfilePage({ params }: PageProps) {
             </div>
           </div>
         </div>
-        
-        <div className="lg:col-span-3">
-          <Tabs defaultValue="products" className="mb-6">
-            <TabsList>
-              <TabsTrigger value="products">محصولات ({userProducts.length})</TabsTrigger>
-              <TabsTrigger value="upvoted">پسندیده‌ها ({upvotedProducts.length})</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="products" className="mt-6">
-              <div className="space-y-4">
-                {userProducts.length > 0 ? (
-                  userProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))
-                ) : (
-                  <div className="text-center py-12 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800">
-                    <h3 className="text-lg font-medium mb-2">هیچ محصولی یافت نشد</h3>
-                    <p className="text-gray-500 dark:text-gray-400">
-                      این کاربر هنوز محصولی ثبت نکرده است.
-                    </p>
-                  </div>
-                )}
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="upvoted" className="mt-6">
-              <div className="space-y-4">
-                {upvotedProducts.length > 0 ? (
-                  upvotedProducts.map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))
-                ) : (
-                  <div className="text-center py-12 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800">
-                    <h3 className="text-lg font-medium mb-2">هیچ محصولی یافت نشد</h3>
-                    <p className="text-gray-500 dark:text-gray-400">
-                      این کاربر هنوز هیچ محصولی را نپسندیده است.
-                    </p>
-                  </div>
-                )}
-              </div>
-            </TabsContent>
-          </Tabs>
+        {/* تب محصولات و پسندیده‌ها */}
+        <div className="w-full">
+          <div className="mb-4 w-full max-w-full">
+            <Tabs defaultValue="products">
+              <TabsList>
+                <TabsTrigger value="products">محصولات ({userProducts.length})</TabsTrigger>
+                <TabsTrigger value="upvoted">پسندیده‌ها ({upvotedProducts.length})</TabsTrigger>
+              </TabsList>
+              <TabsContent value="products" className="mt-6">
+                <div className="space-y-4">
+                  {userProducts.length > 0 ? (
+                    userProducts.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))
+                  ) : (
+                    <div className="text-center py-12 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800">
+                      <h3 className="text-lg font-medium mb-2">هیچ محصولی یافت نشد</h3>
+                      <p className="text-gray-500 dark:text-gray-400">
+                        این کاربر هنوز محصولی ثبت نکرده است.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </TabsContent>
+              <TabsContent value="upvoted" className="mt-6">
+                <div className="space-y-4">
+                  {upvotedProducts.length > 0 ? (
+                    upvotedProducts.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))
+                  ) : (
+                    <div className="text-center py-12 bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-800">
+                      <h3 className="text-lg font-medium mb-2">هیچ محصولی یافت نشد</h3>
+                      <p className="text-gray-500 dark:text-gray-400">
+                        این کاربر هنوز هیچ محصولی را نپسندیده است.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
       </div>
     </div>

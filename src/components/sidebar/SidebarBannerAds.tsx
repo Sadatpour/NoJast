@@ -93,9 +93,20 @@ export const SidebarBannerAds = ({ sidebar, className }: SidebarBannerAdsProps) 
 
   return (
     <aside className={cn("flex flex-col gap-4", className)}>
-      <div className="font-semibold text-center text-xs text-gray-600 dark:text-gray-300 mb-2 flex items-center justify-center gap-2">
+      <div className="font-semibold text-center text-xs text-gray-600 dark:text-gray-300 mb-2 flex items-center justify-center gap-2 border-b border-gray-300 dark:border-zinc-700 pb-2">
         <Megaphone className="w-6 h-6 inline-block mb-0.5" style={{ color: '#F99E32' }} />
-        {locale === 'fa' ? 'اینا پول دادن که دیده بشن!' : 'Paid to catch your eye!'}
+        <span>بنرگاه</span>
+        <span className="text-[.95em] text-gray-500 dark:text-zinc-400">(با شما زنده ایم!)</span>
+        <span className="inline-block w-16 h-6">
+          <svg viewBox="0 0 64 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+            <path id="heartbeat-path" d="M2,12 H12 L16,22 L24,2 L32,22 L36,12 H48 L54,6 L62,12" className="stroke-gray-400 dark:stroke-zinc-300" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+            <circle r="2.5" fill="#ef4444">
+              <animateMotion dur="2s" repeatCount="indefinite">
+                <mpath href="#heartbeat-path" />
+              </animateMotion>
+            </circle>
+          </svg>
+        </span>
       </div>
       {getRandomAds(ads, 3).map(ad => (
         <a
