@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams } from "next/navigation"
 import { useCallback } from "react"
-import { useLanguage } from "@/components/LanguageProvider"
 
 import {
   Select,
@@ -14,15 +13,14 @@ import {
 } from "@/components/ui/select"
 
 const sortOptions = [
-  { value: "newest", label: { fa: "جدیدترین", en: "Newest" } },
-  { value: "popular", label: { fa: "محبوب‌ترین", en: "Most Popular" } },
-  { value: "trending", label: { fa: "داغ‌ترین", en: "Trending" } },
+  { value: "newest", label: "جدیدترین" },
+  { value: "popular", label: "محبوب‌ترین" },
+  { value: "trending", label: "داغ‌ترین" },
 ]
 
 export function SortOptions() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { locale } = useLanguage()
   
   const category = searchParams.get("category") || "all"
   const sort = searchParams.get("sort") || "newest"
@@ -47,13 +45,13 @@ export function SortOptions() {
         onValueChange={handleSortChange}
       >
         <SelectTrigger className="w-full border border-gray-300 dark:border-silver bg-background">
-          <SelectValue placeholder={locale === 'fa' ? 'انتخاب نحوه نمایش' : 'Sort by...'} />
+          <SelectValue placeholder="انتخاب نحوه نمایش" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
             {sortOptions.map(option => (
               <SelectItem key={option.value} value={option.value}>
-                {option.label[locale]}
+                {option.label}
               </SelectItem>
             ))}
           </SelectGroup>

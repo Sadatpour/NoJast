@@ -5,27 +5,25 @@ import { useCallback } from "react"
 
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
-import { useLanguage } from "@/components/LanguageProvider"
 
 const categories = [
-  { id: "all", name: { fa: "همه", en: "All" } },
-  { id: "tools", name: { fa: "ابزارها", en: "Tools" } },
-  { id: "games", name: { fa: "بازی‌ها", en: "Games" } },
-  { id: "ai", name: { fa: "هوش مصنوعی", en: "AI" } },
-  { id: "productivity", name: { fa: "بهره‌وری", en: "Productivity" } },
-  { id: "education", name: { fa: "آموزش", en: "Education" } },
-  { id: "design", name: { fa: "طراحی", en: "Design" } },
-  { id: "development", name: { fa: "توسعه", en: "Development" } },
-  { id: "marketing", name: { fa: "بازاریابی", en: "Marketing" } },
-  { id: "finance", name: { fa: "مالی", en: "Finance" } },
-  { id: "services", name: { fa: "خدمات", en: "Services" } },
-  { id: "others", name: { fa: "سایر", en: "Others" } },
+  { id: "all", name: "همه" },
+  { id: "tools", name: "ابزارها" },
+  { id: "games", name: "بازی‌ها" },
+  { id: "ai", name: "هوش مصنوعی" },
+  { id: "productivity", name: "بهره‌وری" },
+  { id: "education", name: "آموزش" },
+  { id: "design", name: "طراحی" },
+  { id: "development", name: "توسعه" },
+  { id: "marketing", name: "بازاریابی" },
+  { id: "finance", name: "مالی" },
+  { id: "services", name: "خدمات" },
+  { id: "others", name: "سایر" },
 ]
 
 export function CategoryFilter() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { locale } = useLanguage()
   
   const category = searchParams.get("category") || "all"
   const sort = searchParams.get("sort") || "newest"
@@ -58,7 +56,7 @@ export function CategoryFilter() {
           )}
           onClick={() => handleCategoryChange(cat.id)}
         >
-          {cat.name[locale]}
+          {cat.name}
         </Badge>
       ))}
     </div>

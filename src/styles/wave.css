@@ -1,0 +1,41 @@
+.animate-wave {
+  animation: wave 1.5s infinite;
+  display: inline-block;
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+  60% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes heartbeat {
+  0% { transform: scaleX(1) scaleY(1); opacity: 1; }
+  10% { transform: scaleX(1.08) scaleY(0.96); opacity: 0.85; }
+  15% { transform: scaleX(0.92) scaleY(1.08); opacity: 1; }
+  20% { transform: scaleX(1.04) scaleY(0.98); opacity: 0.9; }
+  25% { transform: scaleX(1) scaleY(1); opacity: 1; }
+  100% { transform: scaleX(1) scaleY(1); opacity: 1; }
+}
+
+.heartbeat-stroke {
+  stroke: #ef4444;
+  animation: heartbeat-stroke 1.2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes heartbeat-stroke {
+  0% { stroke: #ef4444; }
+  20% { stroke: #f87171; }
+  40% { stroke: #ef4444; }
+  60% { stroke: #f87171; }
+  100% { stroke: #ef4444; }
+} 

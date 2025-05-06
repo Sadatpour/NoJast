@@ -1,8 +1,3 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/(main)/page": "app/(main)/page.js",
-  "/(main)/dashboard/page": "app/(main)/dashboard/page.js",
-  "/(main)/products/page": "app/(main)/products/page.js",
-  "/(main)/submit-product/page": "app/(main)/submit-product/page.js",
-  "/admin/debug/admin-test/page": "app/admin/debug/admin-test/page.js"
+  "/(main)/page": "app/(main)/page.js"
 }
