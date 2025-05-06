@@ -7,6 +7,7 @@ import { useLanguage } from '@/components/LanguageProvider';
 import { DashboardTabs } from '@/components/dashboard/DashboardTabs';
 import { type ProductWithDetails, type CommentWithUser } from '@/types/database';
 import { useRouter } from 'next/navigation';
+import { AdminPanel } from "@/components/admin/AdminPanel"
 
 export default function DashboardPage({
   searchParams,
@@ -140,11 +141,24 @@ export default function DashboardPage({
     return null;
   }
   
+  // If user is admin, show admin panel
+  if (profile.is_admin) {
+    return (
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold">پنل مدیریت</h1>
+        <p className="text-gray-500 dark:text-gray-400 mt-2">
+          مدیریت محتوا و کاربران سایت
+        </p>
+
+        <AdminPanel />
+      </div>
+    )
+  }
+
+  // For regular users, show their dashboard
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">
-        {locale === 'fa' ? 'داشبورد' : 'Dashboard'}
-      </h1>
+      <h1 className="text-3xl font-bold">داشبورد</h1>
       
       <DashboardTabs 
         profile={profile}

@@ -39,6 +39,21 @@ export function Header({ user }: HeaderProps) {
           
           <nav className="flex items-center space-x-2 rtl:space-x-reverse">
             <ModeToggle />
+            <Link href="/contact">
+              <Button variant="outline" size="sm" className="hidden md:inline-flex">
+                ارتباط با ما
+              </Button>
+            </Link>
+            <Link href="/submit-product">
+              <Button 
+                variant="default" 
+                size="sm" 
+                className="hidden md:inline-flex" 
+                style={{ backgroundColor: '#EF9D38', paddingLeft: 12, paddingRight: 12 }}
+              >
+                ثبت محصول
+              </Button>
+            </Link>
             {user ? (
               <UserNav user={user} />
             ) : (

@@ -9,8 +9,8 @@ export function Footer() {
   const { t, locale } = useLanguage()
 
   return (
-    <footer className="mt-auto border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
+    <footer className="w-full h-16 border-t border-gray-300 dark:border-zinc-500 bg-background/60 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:fixed md:bottom-0 md:left-0 md:right-0 md:z-50">
+      <div className="container flex flex-col items-center justify-between gap-2 h-16 md:flex-row md:py-0">
         <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
           <Link 
             href="/"
@@ -94,7 +94,17 @@ export function Footer() {
             <span className="sr-only">GitHub</span>
           </Link>
         </div>
-        <p className="text-center text-sm text-muted-foreground">{t('footerLove')}</p>
+        <p className="text-center text-sm text-muted-foreground">
+          ساخته شده با ❤️ توسط
+          <Link 
+            href="https://sadatpour.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="mr-1 text-muted-foreground hover:underline"
+          >
+            مجتبا سادات‌پور
+          </Link>
+        </p>
       </div>
     </footer>
   )
