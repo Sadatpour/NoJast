@@ -16,3 +16,6 @@ supabase/.temp
 supabase/.output
 .idea
 .vscode
+.cursor
+.next
+.vscode

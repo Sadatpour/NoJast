@@ -60,7 +60,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       website_url,
       categories,
       created_at,
-      profiles(id, full_name, avatar_url),
+      users(id, full_name, avatar_url),
       (select count(*) from product_upvotes where product_id = products.id) as upvotes_count
     `)
     .eq('slug', params.id)
@@ -113,21 +113,21 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   <h1 className="text-3xl font-bold">{product.title}</h1>
                   <div className="flex items-center gap-2 mt-2">
                     <div className="relative h-8 w-8 rounded-full overflow-hidden bg-gray-200">
-                      {product.profiles.avatar_url ? (
+                      {product.users.avatar_url ? (
                         <Image 
-                          src={product.profiles.avatar_url} 
-                          alt={product.profiles.full_name}
+                          src={product.users.avatar_url} 
+                          alt={product.users.full_name}
                           fill
                           className="object-cover"
                         />
                       ) : (
                         <div className="flex items-center justify-center h-full w-full bg-primary text-primary-foreground text-xs font-semibold">
-                          {product.profiles.full_name.charAt(0)}
+                          {product.users.full_name.charAt(0)}
                         </div>
                       )}
                     </div>
                     <span className="text-sm text-gray-500 dark:text-gray-400">
-                      {product.profiles.full_name} • {timeAgo}
+                      {product.users.full_name} • {timeAgo}
                     </span>
                   </div>
                 </div>

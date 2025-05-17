@@ -48,11 +48,23 @@ export function ProductCard({ product, className, locale = 'fa' }: ProductCardPr
   const [timeAgo, setTimeAgo] = useState("");
 
   useEffect(() => {
-    setTimeAgo(
-      locale === 'fa'
-        ? formatDistanceToNowJalali(new Date(product.createdAt), { addSuffix: true })
-        : formatDistanceToNow(new Date(product.createdAt), { addSuffix: true })
-    );
+    try {
+      const date = new Date(product.createdAt);
+      if (isNaN(date.getTime())) {
+        console.error('Invalid date:', product.createdAt);
+        setTimeAgo('');
+        return;
+      }
+      
+      setTimeAgo(
+        locale === 'fa'
+          ? formatDistanceToNowJalali(date, { addSuffix: true })
+          : formatDistanceToNow(date, { addSuffix: true })
+      );
+    } catch (error) {
+      console.error('Error formatting date:', error);
+      setTimeAgo('');
+    }
   }, [locale, product.createdAt]);
 
   return (
@@ -65,12 +77,18 @@ export function ProductCard({ product, className, locale = 'fa' }: ProductCardPr
       <div className="flex-shrink-0">
         <Link href={`/products/${product.slug}`}>
           <div className="relative h-40 w-full sm:w-40 rounded-md overflow-hidden">
-            <Image
-              src={product.thumbnailUrl}
-              alt={product.title}
-              fill
-              className="object-cover"
-            />
+            {product.thumbnailUrl ? (
+              <Image
+                src={product.thumbnailUrl}
+                alt={product.title}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center">
+                <span className="text-gray-400 dark:text-gray-600">No image</span>
+              </div>
+            )}
           </div>
         </Link>
       </div>
@@ -93,11 +111,17 @@ export function ProductCard({ product, className, locale = 'fa' }: ProductCardPr
           {product.description}
         </p>
         <div className="flex flex-wrap gap-1 mt-2">
-          {product.categories.map((category) => (
-            <Badge key={category} variant="secondary" className="text-xs">
-              {category}
+          {product.category ? (
+            <Badge variant="secondary" className="text-xs">
+              {locale === 'fa' ? product.category.name : (product.category.name_en || product.category.name)}
             </Badge>
-          ))}
+          ) : product.categories && Array.isArray(product.categories) ? (
+            product.categories.map((category) => (
+              <Badge key={category} variant="secondary" className="text-xs">
+                {category}
+              </Badge>
+            ))
+          ) : null}
         </div>
         <div className="mt-auto pt-3 flex items-center justify-between">
           <div className="flex items-center gap-2">

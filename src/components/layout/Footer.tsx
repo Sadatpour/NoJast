@@ -16,17 +16,10 @@ export function Footer() {
             href="/"
             className="flex items-center justify-center"
           >
-            {locale === 'fa' ? (
-              <Image src="/logos/logo-fa.png" alt="نوجست" width={180} height={60} className="h-12 w-auto" priority />
-            ) : (
-              <>
-                <Image src="/logos/logo-en.png" alt="NoJast" width={40} height={40} className="h-10 w-auto" priority />
-                <span className="font-bold text-xl ml-2">NoJast</span>
-              </>
-            )}
+            <Image src="/logos/logo-fa.png" alt="نوجست" width={120} height={40} className="h-8 w-auto" priority style={{height: 'auto'}} />
           </Link>
           <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            {t('footerTagline')}
+            پلتفرمی برای کشف، رای دادن و بحث در مورد جدیدترین محصولات و استارتاپ‌های ایرانی
           </p>
         </div>
         <div className="flex items-center justify-center space-x-2 rtl:space-x-reverse">

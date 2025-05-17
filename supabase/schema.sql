@@ -67,6 +67,7 @@ CREATE TABLE if not exists banner_ads (
   start_date timestamptz not null,
   end_date timestamptz not null,
   is_active boolean not null default true,
+  type text default 'banner',
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );

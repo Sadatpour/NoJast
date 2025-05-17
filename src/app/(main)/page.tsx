@@ -32,10 +32,9 @@ export default async function HomePage({
     .from('products')
     .select(`
       *,
-      users:user_id (id, full_name, username, avatar_url),
-      categories:category_id (id, name, name_en, slug)
+      profiles:user_id (id, full_name, username, avatar_url)
     `)
-    .eq('is_approved', true); // Only show approved products
+    .eq('status', 'approved'); // Only show approved products
 
   // Apply category filter
   if (categorySlug && categorySlug !== 'all') {
@@ -69,16 +68,23 @@ export default async function HomePage({
   
   if (products && products.length > 0) {
     for (const product of products) {
-      const { data: upvotesData } = await supabase
-        .from('upvotes')
-        .select('id', { count: 'exact' })
+      const { count: upvoteCount } = await supabase
+        .from('product_upvotes')
+        .select('id', { count: 'exact', head: true })
         .eq('product_id', product.id);
+
+      // Ensure the date is in ISO format
+      const createdAt = new Date(product.created_at).toISOString();
       
       processedProducts.push({
         ...product,
-        user: product.users,
-        category: product.categories,
-        upvote_count: upvotesData?.length || 0
+        user: {
+          id: product.profiles.id,
+          name: product.profiles.full_name || 'Unknown User',
+          avatarUrl: product.profiles.avatar_url,
+        },
+        upvote_count: upvoteCount || 0,
+        createdAt, // Use the formatted date
       });
     }
   }

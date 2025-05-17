@@ -37,7 +37,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         website_url,
         categories,
         created_at,
-        profiles(id, full_name, avatar_url),
+        users(id, full_name, avatar_url),
         (select count(*) from product_upvotes where product_id = products.id) as upvotes_count
       `)
       .or(`title.ilike.%${q}%,description.ilike.%${q}%`)
@@ -80,9 +80,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         hasUpvoted: !!userUpvotes[product.id],
         createdAt: product.created_at,
         user: {
-          id: product.profiles.id,
-          name: product.profiles.full_name,
-          avatarUrl: product.profiles.avatar_url,
+          id: product.users.id,
+          name: product.users.full_name,
+          avatarUrl: product.users.avatar_url,
         }
       }))
     }

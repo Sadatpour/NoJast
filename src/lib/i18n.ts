@@ -61,26 +61,4 @@ export const translations = {
     footerTagline: 'نو (new) + جَست (search)',
     footerLove: 'با ❤️ در ایران توسط مجتبی سادات پور',
   }
-}
-
-export const banners = {
-  home: [
-    { 
-      imageUrl: '/banners/banner1.jpg',
-      linkUrl: 'https://example.com/sponsor1',
-      altText: 'Sponsor Banner 1'
-    },
-    {
-      imageUrl: '/banners/banner2.jpg',
-      linkUrl: 'https://example.com/sponsor2',
-      altText: 'Sponsor Banner 2'
-    }
-  ],
-  product: [
-    {
-      imageUrl: '/banners/banner3.jpg',
-      linkUrl: 'https://example.com/sponsor3',
-      altText: 'Sponsor Banner 3'
-    }
-  ]
 } 

@@ -72,7 +72,7 @@ export default async function UserProfilePage({ params }: PageProps) {
       website_url,
       categories,
       created_at,
-      profiles(id, full_name, avatar_url),
+      users(id, full_name, avatar_url),
       (select count(*) from product_upvotes where product_id = products.id) as upvotes_count
     `)
     .eq('user_id', profile.id)
@@ -98,7 +98,7 @@ export default async function UserProfilePage({ params }: PageProps) {
       website_url,
       categories,
       created_at,
-      profiles(id, full_name, avatar_url),
+      users(id, full_name, avatar_url),
       (select count(*) from product_upvotes where product_id = products.id) as upvotes_count
     `)
     .in('id', upvotedIds.length > 0 ? upvotedIds : ['no-results'])
@@ -137,9 +137,9 @@ export default async function UserProfilePage({ params }: PageProps) {
       hasUpvoted: !!currentUserUpvotes[product.id],
       createdAt: product.created_at,
       user: {
-        id: product.profiles.id,
-        name: product.profiles.full_name,
-        avatarUrl: product.profiles.avatar_url,
+        id: product.users.id,
+        name: product.users.full_name,
+        avatarUrl: product.users.avatar_url,
       }
     }))
   }

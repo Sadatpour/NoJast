@@ -25,7 +25,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { formatDistanceToNow } from "date-fns"
-import { fa } from "date-fns/locale"
+import fa from '@/lib/date-locale'
 import { useToast } from "@/components/ui/use-toast"
 
 interface Product {
@@ -36,7 +36,7 @@ interface Product {
   status: 'pending' | 'approved' | 'rejected'
   created_at: string
   user_id: string
-  profiles: {
+  users: {
     full_name: string
   }
 }
@@ -62,7 +62,7 @@ export function ProductsManagement() {
           status,
           created_at,
           user_id,
-          profiles (
+          users:user_id (
             full_name
           )
         `)
@@ -78,8 +78,9 @@ export function ProductsManagement() {
       if (error) throw error
       
       setProducts(data || [])
-    } catch (error) {
-      console.error('Error fetching products:', error)
+    } catch (error: any) {
+      console.error('Error fetching products:', error.message, error.details, error.hint)
+      setProducts([])
     } finally {
       setIsLoading(false)
     }
@@ -261,7 +262,7 @@ export function ProductsManagement() {
                     </div>
                   </TableCell>
                   <TableCell className="font-medium">{product.title}</TableCell>
-                  <TableCell>{product.profiles.full_name}</TableCell>
+                  <TableCell>{product.users.full_name}</TableCell>
                   <TableCell>
                     {formatDistanceToNow(new Date(product.created_at), {
                       addSuffix: true,
@@ -338,8 +339,8 @@ export function ProductsManagement() {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={6} className="h-24 text-center">
-                  هیچ محصولی یافت نشد.
+                <TableCell colSpan={6} className="h-24 text-right">
+                  هیچ محصولی یافت نشد
                 </TableCell>
               </TableRow>
             )}

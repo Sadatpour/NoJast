@@ -14,7 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { formatDistanceToNow } from "date-fns";
-import { fa } from "date-fns/locale";
+import fa from '@/lib/date-locale'
 import { useToast } from "@/components/ui/use-toast";
 import { Check, X, Eye } from "lucide-react";
 
@@ -141,7 +141,7 @@ export function PendingCommentsManagement() {
             ) : comments.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={5} className="h-24 text-center">
-                  هیچ نظری در انتظار تایید نیست.
+                  هیچ نظری در انتظار تایید نیست
                 </TableCell>
               </TableRow>
             ) : (

@@ -35,9 +35,14 @@ const getProducts = async (
       website_url,
       categories,
       created_at,
-      profiles(id, full_name, avatar_url),
-      (select count(*) from product_upvotes where product_id = products.id) as upvotes_count
+      user_id,
+      profiles!user_id (
+        id,
+        full_name,
+        avatar_url
+      )
     `)
+    .eq('status', 'approved')
   
   // Apply category filter if not "all"
   if (category !== "all") {
@@ -48,7 +53,8 @@ const getProducts = async (
   if (sort === "newest") {
     query = query.order('created_at', { ascending: false })
   } else if (sort === "popular") {
-    query = query.order('upvotes_count', { ascending: false })
+    // For now, just use created_at for sorting
+    query = query.order('created_at', { ascending: false })
   }
   
   // Limit to 20 products
@@ -58,20 +64,35 @@ const getProducts = async (
   const { data: productsData, error } = await query
   
   if (error) {
-    console.error("Error fetching products:", error)
+    console.error("Error fetching products:", {
+      message: error.message,
+      details: error.details,
+      hint: error.hint,
+      code: error.code,
+      error: error
+    })
+    throw new Error(`Failed to fetch products: ${error.message}`)
+  }
+  
+  if (!productsData) {
+    console.error("No products data returned")
     return []
   }
+
+  console.log("Products data:", productsData)
   
   // Get upvotes for logged in user
   let userUpvotes: Record<string, boolean> = {}
   
   if (user) {
-    const { data: upvotesData } = await supabase
+    const { data: upvotesData, error: upvotesError } = await supabase
       .from('product_upvotes')
       .select('product_id')
       .eq('user_id', user.id)
     
-    if (upvotesData) {
+    if (upvotesError) {
+      console.error("Error fetching upvotes:", upvotesError)
+    } else if (upvotesData) {
       userUpvotes = upvotesData.reduce((acc, upvote) => {
         acc[upvote.product_id] = true
         return acc
@@ -80,23 +101,26 @@ const getProducts = async (
   }
   
   // Format products
-  return productsData.map(product => ({
-    id: product.id,
-    title: product.title,
-    description: product.description,
-    slug: product.slug,
-    thumbnailUrl: product.thumbnail_url,
-    websiteUrl: product.website_url,
-    categories: product.categories,
-    upvotes: product.upvotes_count,
-    hasUpvoted: !!userUpvotes[product.id],
-    createdAt: product.created_at,
-    user: {
-      id: product.profiles.id,
-      name: product.profiles.full_name,
-      avatarUrl: product.profiles.avatar_url,
+  return productsData.map(product => {
+    console.log("Processing product:", product)
+    return {
+      id: product.id,
+      title: product.title,
+      description: product.description,
+      slug: product.slug,
+      thumbnailUrl: product.thumbnail_url,
+      websiteUrl: product.website_url,
+      categories: product.categories,
+      upvotes: 0, // We'll add this back later
+      hasUpvoted: !!userUpvotes[product.id],
+      createdAt: product.created_at,
+      user: {
+        id: product.profiles?.id || product.user_id,
+        name: product.profiles?.full_name || 'Unknown User',
+        avatarUrl: product.profiles?.avatar_url,
+      }
     }
-  }))
+  })
 }
 
 export default async function ProductsPage({

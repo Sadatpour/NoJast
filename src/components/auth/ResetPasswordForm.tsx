@@ -89,7 +89,7 @@ export function ResetPasswordForm() {
               <FormItem>
                 <FormLabel>رمز عبور جدید</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="******" {...field} />
+                  <Input type="password" placeholder="******" autoComplete="new-password" {...field} />
                 </FormControl>
                 <FormDescription>
                   رمز عبور باید حداقل ۶ کاراکتر باشد
@@ -105,7 +105,7 @@ export function ResetPasswordForm() {
               <FormItem>
                 <FormLabel>تکرار رمز عبور</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="******" {...field} />
+                  <Input type="password" placeholder="******" autoComplete="new-password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

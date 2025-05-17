@@ -25,7 +25,7 @@ import {
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
 import { formatDistanceToNow } from "date-fns"
-import { fa } from "date-fns/locale"
+import fa from '@/lib/date-locale'
 import { useToast } from "@/components/ui/use-toast"
 import {
   Dialog,

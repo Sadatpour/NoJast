@@ -134,6 +134,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
               onChange={(e) => setEmail(e.target.value)}
               disabled={isLoading}
               required
+              autoComplete="email"
             />
           </div>
           <div className="grid gap-2">
@@ -158,6 +159,7 @@ export function LoginForm({ className, ...props }: UserAuthFormProps) {
               onChange={(e) => setPassword(e.target.value)}
               disabled={isLoading}
               required
+              autoComplete="current-password"
             />
           </div>
           <Button className="bg-secondary hover:bg-secondary/90" disabled={isLoading}>

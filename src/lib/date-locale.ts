@@ -204,4 +204,6 @@ export const fa: Locale = {
     weekStartsOn: 6 as 0 | 1 | 2 | 3 | 4 | 5 | 6,
     firstWeekContainsDate: 1,
   },
-}; 
+};
+
+export default fa; 

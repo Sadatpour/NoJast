@@ -143,7 +143,7 @@ export function SignupForm() {
               <FormItem>
                 <FormLabel>نام</FormLabel>
                 <FormControl>
-                  <Input placeholder="نام شما" {...field} />
+                  <Input placeholder="نام شما" autoComplete="name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -156,7 +156,7 @@ export function SignupForm() {
               <FormItem>
                 <FormLabel>ایمیل</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="example@example.com" {...field} />
+                  <Input type="email" placeholder="example@example.com" autoComplete="email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -169,7 +169,7 @@ export function SignupForm() {
               <FormItem>
                 <FormLabel>رمز عبور</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="******" {...field} />
+                  <Input type="password" placeholder="******" autoComplete="new-password" {...field} />
                 </FormControl>
                 <FormDescription>
                   رمز عبور باید حداقل ۶ کاراکتر باشد

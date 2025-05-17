@@ -130,26 +130,4 @@ export const translations = {
     footerTagline: 'New + Search',
     footerLove: 'Made with ❤️ in Iran by Mojtaba Sadatpour',
   }
-}
-
-export const banners = {
-  home: [
-    { 
-      imageUrl: '/banners/banner1.jpg',
-      linkUrl: 'https://example.com/sponsor1',
-      altText: 'Sponsor Banner 1'
-    },
-    {
-      imageUrl: '/banners/banner2.jpg',
-      linkUrl: 'https://example.com/sponsor2',
-      altText: 'Sponsor Banner 2'
-    }
-  ],
-  product: [
-    {
-      imageUrl: '/banners/banner3.jpg',
-      linkUrl: 'https://example.com/sponsor3',
-      altText: 'Sponsor Banner 3'
-    }
-  ]
 } 

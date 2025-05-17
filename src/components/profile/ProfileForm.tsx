@@ -219,7 +219,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
                 <FormItem>
                   <FormLabel>نام کامل</FormLabel>
                   <FormControl>
-                    <Input placeholder="نام و نام خانوادگی" {...field} />
+                    <Input placeholder="نام کامل" autoComplete="name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -232,7 +232,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
                 <FormItem>
                   <FormLabel>نام کاربری</FormLabel>
                   <FormControl>
-                    <Input placeholder="username" {...field} />
+                    <Input placeholder="نام کاربری" autoComplete="username" {...field} />
                   </FormControl>
                   <FormDescription>
                     آدرس پروفایل: nojast.com/u/{field.value || "username"}
@@ -249,7 +249,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
               <FormItem>
                 <FormLabel>وب‌سایت</FormLabel>
                 <FormControl>
-                  <Input placeholder="https://example.com" {...field} />
+                  <Input placeholder="وب‌سایت" autoComplete="url" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

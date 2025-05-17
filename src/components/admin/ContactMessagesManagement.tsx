@@ -129,7 +129,7 @@ export function ContactMessagesManagement() {
             ) : messages.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={5} className="h-24 text-center">
-                  هیچ پیامی ثبت نشده است.
+                  هیچ پیامی ثبت نشده است
                 </TableCell>
               </TableRow>
             ) : (

@@ -6,42 +6,31 @@ import { ProductsManagement } from "./ProductsManagement"
 import { UsersManagement } from "./UsersManagement"
 import { ReportedCommentsManagement } from "./ReportedCommentsManagement"
 import { PendingCommentsManagement } from "./PendingCommentsManagement"
-import { AdsManagement } from "./AdsManagement"
 import { ContactMessagesManagement } from "./ContactMessagesManagement"
 
 export function AdminPanel() {
   return (
-    <Tabs defaultValue="products" className="space-y-6">
-      <TabsList>
+    <Tabs defaultValue="products" className="w-full">
+      <TabsList className="grid w-full grid-cols-5">
         <TabsTrigger value="products">محصولات</TabsTrigger>
         <TabsTrigger value="users">کاربران</TabsTrigger>
-        <TabsTrigger value="pending-comments">نظرات در انتظار تایید</TabsTrigger>
-        <TabsTrigger value="comments">نظرات گزارش شده</TabsTrigger>
-        <TabsTrigger value="ads">مدیریت تبلیغات</TabsTrigger>
-        <TabsTrigger value="contact">پیام‌های ارتباط با ما</TabsTrigger>
+        <TabsTrigger value="reported-comments">نظرات گزارش شده</TabsTrigger>
+        <TabsTrigger value="pending-comments">نظرات در انتظار</TabsTrigger>
+        <TabsTrigger value="contact-messages">پیام‌های تماس</TabsTrigger>
       </TabsList>
-      
-      <TabsContent value="products" className="p-6 bg-white dark:bg-gray-900 rounded-lg shadow">
+      <TabsContent value="products">
         <ProductsManagement />
       </TabsContent>
-      
-      <TabsContent value="users" className="p-6 bg-white dark:bg-gray-900 rounded-lg shadow">
+      <TabsContent value="users">
         <UsersManagement />
       </TabsContent>
-      
-      <TabsContent value="pending-comments" className="p-6 bg-white dark:bg-gray-900 rounded-lg shadow">
-        <PendingCommentsManagement />
-      </TabsContent>
-      
-      <TabsContent value="comments" className="p-6 bg-white dark:bg-gray-900 rounded-lg shadow">
+      <TabsContent value="reported-comments">
         <ReportedCommentsManagement />
       </TabsContent>
-      
-      <TabsContent value="ads" className="p-6 bg-white dark:bg-gray-900 rounded-lg shadow">
-        <AdsManagement />
+      <TabsContent value="pending-comments">
+        <PendingCommentsManagement />
       </TabsContent>
-      
-      <TabsContent value="contact" className="p-6 bg-white dark:bg-gray-900 rounded-lg shadow">
+      <TabsContent value="contact-messages">
         <ContactMessagesManagement />
       </TabsContent>
     </Tabs>
