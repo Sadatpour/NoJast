@@ -1,6 +1,0 @@
-{
-  "/contact/page": "app/contact/page.js",
-  "/(main)/page": "app/(main)/page.js",
-  "/(main)/dashboard/page": "app/(main)/dashboard/page.js",
-  "/(main)/submit-product/page": "app/(main)/submit-product/page.js"
-}
